@@ -5,7 +5,6 @@ import os
 import cv2
 import time
 
-os.chdir('/Users/kori0909/Downloads')
 model = YOLO("yolov8n.pt")
 tracker = sv.ByteTrack()
 vidObj = cv2.VideoCapture('topdown.mp4') 
