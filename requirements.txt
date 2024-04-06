@@ -1,2 +1,2 @@
-ultralytics
-supervision
+ultralytics==0.1.0
+supervision>=0.2.0
