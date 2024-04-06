@@ -10,3 +10,11 @@ For the 2024 YVR Hackathon Crow's nest Facility Detection System
 2. `conda activate yvr`
 3. `pip install -r requirements.txt`
 4. `python src/camera.py`
+
+## Names
+
+- Kety
+- Kori
+- Swathi
+- Francis
+- Ife

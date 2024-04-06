@@ -50,10 +50,8 @@ while cap.isOpened():
         uncropped = frame.copy()
         frame = frame[220:530, :]
         
-        # Perform inference on the frame
         results = model(frame)[0]
         
-        # Format detections object
         detections = sv.Detections.from_ultralytics(results)
         
         detections = tracker.update_with_detections(detections)
@@ -76,11 +74,9 @@ while cap.isOpened():
                     frames[tracker_id] = frame_id
             
 
-        # Display the annotated frame
         if annotated_frame is not None:
             cv2.imshow("YOLOv8 Inference", annotated_frame)
         
-        # Break the loop if 'q' is pressed
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
     else:
