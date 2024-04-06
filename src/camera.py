@@ -7,7 +7,6 @@ import time
 
 model = YOLO("yolov8n.pt")
 tracker = sv.ByteTrack()
-vidObj = cv2.VideoCapture('topdown.mp4') 
 
 frame_id = 0
 centroids = {}
