@@ -12,8 +12,7 @@ annotate = sv.BoxAnnotator()
 classNames = ["person", "backpack", "umbrella",
               "handbag", "suitcase", "skateboard", "surfboard", "tennis racket", "bottle", "wine glass", "cup",
               "fork", "knife", "laptop", "cell phone",
-              "teddy bear"
-              ]
+              "teddy bear"]
 
 while True:
     success, img = cap.read()

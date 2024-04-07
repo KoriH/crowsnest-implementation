@@ -8,7 +8,7 @@ For the 2024 YVR Hackathon Crow's nest Facility Detection System
 
 1. `conda create --name yvr python=3.12`
 2. `conda activate yvr`
-3. `pip install yolov5 supervisor`
+3. `pip install yolov5 supervisor opencv-python numpy`
 4. `python src/camera.py`
 
 ## Contributers
@@ -18,3 +18,5 @@ For the 2024 YVR Hackathon Crow's nest Facility Detection System
 - Swathi
 - Francis
 - Ife
+- Sophie
+- Ricky
