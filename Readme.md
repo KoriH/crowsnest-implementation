@@ -4,19 +4,15 @@ For the 2024 YVR Hackathon Crow's nest Facility Detection System
 
 ## Steps to run
 
-*Note: You need Conda for this installation method, test with* `conda --version` *and if something is there then its good*
-
+*Note: Conda installation method
 1. `conda create --name yvr python=3.12`
 2. `conda activate yvr`
 3. `pip install yolov5 supervisor opencv-python numpy`
-4. `python src/camera.py`
 
-## Contributers
+*How To Run*
 
-- Kety
-- Kori
-- Swathi
-- Francis
-- Ife
-- Sophie
-- Ricky
+To run from your webcam, use:
+`python src/camera.py`
+
+To run from live camera feed, use:
+`python src/liveFeed.py`
