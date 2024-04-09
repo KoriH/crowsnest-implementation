@@ -7,7 +7,7 @@ For the 2024 YVR Hackathon Crow's nest Facility Detection System
 *Note: Conda installation method
 1. `conda create --name yvr python=3.12`
 2. `conda activate yvr`
-3. `pip install yolov5 supervisor opencv-python numpy`
+3. `pip install ultralytics supervision opencv-python numpy`
 
 *How To Run*
 
