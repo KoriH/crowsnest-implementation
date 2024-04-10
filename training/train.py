@@ -1,7 +1,13 @@
 from ultralytics import YOLO
-import os 
+import os
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
-model = YOLO("yolov8n.pt")
+import torch
+
+torch.cuda.is_available()
+
+model = YOLO("yolov5nu.pt")
 
 results = model.train(
     data="config.yaml",
