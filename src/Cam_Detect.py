@@ -6,7 +6,15 @@ from ultralytics import YOLO
 import supervision as sv
 import numpy as np
 import time
+import threading
+from queue import Queue
 from datetime import datetime, timedelta
+
+model_name = "yolov8n.pt"
+video_source = "How airport baggage handlers handle your baggage.mp4"
+video_source = "rtsp://service:Password!234@192.168.1.123/view.html?mode=l&tcp"
+frame_queue = Queue()
+stop_threads = False
 
 # Email Function (change the email address)
 def send_email(subject, body):
@@ -36,7 +44,7 @@ def send_email(subject, body):
 
 # Initialize the model and tracker with error handling
 try:
-    model = YOLO("yolov8n.pt")  # Load the model
+    model = YOLO(model_name)  # Load the model
     tracker = sv.ByteTrack()  # Initialize the ByteTrack object tracker
 except Exception as e:
     print(f"Error initializing model or tracker: {e}")
@@ -121,8 +129,19 @@ def log_event(event_message):
 
 #Start video capture:
 #cap = cv2.VideoCapture(0)#0 for default camera;
-cap = cv2.VideoCapture("How airport baggage handlers handle your baggage.mp4")
+cap = cv2.VideoCapture(video_source)
 
+def read_frames(cap, frame_queue):
+    while not stop_threads:
+        success, frame = cap.read()
+        if success:
+            frame_queue.put(frame)
+        else:
+            break
+
+
+thread = threading.Thread(target=read_frames, args=(cap, frame_queue))
+thread.start()
 
 #### Configurable email notification thresholds
 person_count_threshold = 3  # for crowd detection
@@ -149,10 +168,10 @@ unique_aircanada_crew_ids = set()
 # Main loop to process video frames
 person_boxes = []
 while cap.isOpened():
-    success, frame = cap.read()
-    if not success:
-        break
+    if frame_queue.empty():
+        continue
 
+    frame = frame_queue.get()
     results = model(frame)[0]
     detections = sv.Detections.from_ultralytics(results)
     detections = tracker.update_with_detections(detections)
@@ -244,7 +263,9 @@ while cap.isOpened():
  
     cv2.imshow("YOLOv8 Inference", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
+        stop_threads = True
         break
 
+thread.join()
 cap.release()
 cv2.destroyAllWindows()
