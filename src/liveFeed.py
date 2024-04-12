@@ -4,7 +4,7 @@ import threading
 import queue
 from ultralytics import YOLO
 
-stream_URL = "rtsp://service:Password!234@192.168.1.123/view.html?mode=l&tcp"
+stream_URL = "rtsp://Live:CameraDemo24!@192.168.0.252/view.html?mode=l&tcp"
 model_name = "yolov8n.pt"
 stop_threads = False
 
