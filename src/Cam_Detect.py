@@ -9,6 +9,7 @@ import time
 import threading
 from queue import Queue
 from datetime import datetime, timedelta
+import platform
 
 model_name = "yolov8n.pt"
 video_source = "Recording 2024-04-11 131144.mp4"
@@ -49,6 +50,12 @@ try:
 except Exception as e:
     print(f"Error initializing model or tracker: {e}")
     exit()  # Kill the program if initialization fails
+
+# Use openvino, doesn't work on Mac
+if platform.system() != 'Darwin':
+    model.export(format="openvino", half=True)
+    model = YOLO('yolov8n_openvino_model/')
+
 
 # List of trash classes (all in lower case for consistency)
 trash_classes = [
