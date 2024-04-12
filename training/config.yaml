@@ -1,6 +1,7 @@
-path: /home/ksh/VSCode/yvr-hackathon/training/datasets/Final-Dataset.v9-rotation.yolov8
+path: /home/ksh/VSCode/yvr-hackathon/training/datasets/asdfsadfsdf
 train: train/
 val: valid/
+test: test/
 
 names:
   0: mixed

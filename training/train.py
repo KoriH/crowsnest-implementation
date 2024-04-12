@@ -11,11 +11,8 @@ model = YOLO("yolov5nu.pt")
 
 results = model.train(
     data="config.yaml",
-    patience=25,
-    imgsz=640,
     device=0,
-    pretrained=True,
     optimizer='SGD',
-    epochs=40)
+    epochs=20)
 
 metrics = model.val()
