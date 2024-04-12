@@ -1,9 +1,7 @@
-path: /home/ksh/VSCode/yvr-hackathon/training/datasets/asdfsadfsdf
+path: /home/ksh/VSCode/yvr-hackathon/training/datasets/Luggage-person-detection-airport.v3i.yolov8
 train: train/
 val: valid/
 test: test/
 
-names:
-  0: mixed
-  1: restaurant-fastfood
-  2: retail-groceries
+nc: 2
+names: ['luggage', 'person']

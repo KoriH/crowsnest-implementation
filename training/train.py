@@ -7,12 +7,12 @@ import torch
 
 torch.cuda.is_available()
 
-model = YOLO("yolov5nu.pt")
+model = YOLO("yolov8n.pt")
 
 results = model.train(
     data="config.yaml",
     device=0,
     optimizer='SGD',
-    epochs=20)
+    epochs=100)
 
 metrics = model.val()
