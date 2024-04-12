@@ -17,6 +17,10 @@ def read_frames(cap, frame_queue):
 model = YOLO("yolov8n.pt")
 cap = cv2.VideoCapture("rtsp://service:Password!234@192.168.1.123/view.html?mode=l&tcp")
 
+# model.export(format="openvino", half=True)
+# ov_model=YOLO('yolov8n_openvino_model/')
+
+
 threading.Thread(target=read_frames, args=(cap, frame_queue)).start()
 
 bounding_box_annotator = sv.BoundingBoxAnnotator()
