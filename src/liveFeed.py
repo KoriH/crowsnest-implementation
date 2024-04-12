@@ -4,24 +4,26 @@ import threading
 import queue
 from ultralytics import YOLO
 
+stream_URL = "rtsp://service:Password!234@192.168.1.123/view.html?mode=l&tcp"
+model_name = "yolov8n.pt"
+stop_threads = False
+
+model = YOLO(model_name)
+cap = cv2.VideoCapture(stream_URL)
 frame_queue = queue.Queue(maxsize=100)
 
 def read_frames(cap, frame_queue):
-    while True:
+    while not stop_threads:
         success, frame = cap.read()
         if success:
             frame_queue.put(frame)
         else:
             break
 
-model = YOLO("yolov8n.pt")
-cap = cv2.VideoCapture("rtsp://service:Password!234@192.168.1.123/view.html?mode=l&tcp")
 
-# model.export(format="openvino", half=True)
-# ov_model=YOLO('yolov8n_openvino_model/')
+thread = threading.Thread(target=read_frames, args=(cap, frame_queue))
+thread.start()
 
-
-threading.Thread(target=read_frames, args=(cap, frame_queue)).start()
 
 bounding_box_annotator = sv.BoundingBoxAnnotator()
 label_annotator = sv.LabelAnnotator()
@@ -45,8 +47,12 @@ while True:
             scene=annotated_frame, detections=detections, labels=labels)
 
         cv2.imshow('Webcam', annotated_frame)
+
         if cv2.waitKey(1) == ord('q'):
+            stop_threads = True
             break
+
+thread.join()
 
 cap.release()
 cv2.destroyAllWindows()
