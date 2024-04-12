@@ -9,10 +9,10 @@ import time
 import threading
 from queue import Queue
 from datetime import datetime, timedelta
+import platform
 
 model_name = "yolov8n.pt"
 video_source = "How airport baggage handlers handle your baggage.mp4"
-video_source = "rtsp://service:Password!234@192.168.1.123/view.html?mode=l&tcp"
 frame_queue = Queue()
 stop_threads = False
 
@@ -49,6 +49,12 @@ try:
 except Exception as e:
     print(f"Error initializing model or tracker: {e}")
     exit()  # Kill the program if initialization fails
+
+# Use openvino, doesn't work on Mac
+if platform.system() != 'Darwin':
+    model.export(format="openvino", half=True)
+    model = YOLO('yolov8n_openvino_model/')
+
 
 # List of trash classes (all in lower case for consistency)
 trash_classes = [
