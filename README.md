@@ -12,3 +12,4 @@ For the 2024 YVR Hackathon Crow's nest Facility Detection System. Machine learni
 `downloader.py` downloads an annotated video after inferencing with our model
 `cam_detect.py` runs the streaming from the camera and inference
 
+  
