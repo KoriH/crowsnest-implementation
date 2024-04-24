@@ -1,5 +1,7 @@
 ## YVR Hackathon Machine Vision
 
+<video controls src="training/Demonstartion.mp4" title="Title"></video>
+
 For the 2024 YVR Hackathon Crow's nest Facility Detection System. Machine learning model that utilizes YOLOv8n to inference live feed cams. Model was tuned to work better at an airport setting to detect passengers, staff, baggage, unattendent baggage and garbage. The program will then send an alert via email to a designated email with a description of what the camera has captured in the past few seconds.
  
 ## Challenges
